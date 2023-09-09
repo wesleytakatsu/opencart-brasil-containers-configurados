@@ -1,0 +1,64 @@
+version: '3'
+services:
+    database:
+      image: mariadb:latest
+      # image: mysql:latest
+      restart: always
+      ports:
+      - "${DB_PORT:-3306}:3306"
+      environment:
+        MYSQL_ROOT_HOST: "%"
+        MYSQL_ROOT_PASSWORD: '${DB_PASSWORD:-root}'
+        # MYSQL_DATABASE: '${DB_DATABASE:-arquivos}'
+        MYSQL_USER: '${DB_USERNAME:-root}'
+        MYSQL_PASSWORD: '${DB_PASSWORD:-root}'
+        MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
+      volumes:
+        - './database_data:/var/lib/mysql'
+      networks:
+        - servidorweb
+      container_name: servidor_web_mysql
+
+    phpmyadmin:
+        image: phpmyadmin/phpmyadmin
+        container_name: servidor_web_phpmyadmin
+        environment:
+          PMA_HOST: database
+          PMA_PORT: '${DB_PORT:-3306}'
+          PMA_USER: '${DB_USERNAME:-root}'
+          PMA_PASSWORD: '${DB_PASSWORD:-root}'
+        ports:
+          - 8080:80
+        networks:
+          - servidorweb
+        depends_on:
+          - database
+
+
+    servidorphp:
+        image: php:7.4-apache
+        build:
+          context: .
+          dockerfile: Dockerfile
+        container_name: servidor_web_php
+        ports:
+          - '${APP_PORT:-80}:80'
+        volumes:
+          - './opencartbrasil:/var/www/html'
+          - './php_config/php.ini:/usr/local/etc/php/php.ini'
+        networks:
+          - servidorweb
+        depends_on:
+          - database
+        #comandos a serem executados, instala o mysqli e habilita. Instala o zip e o gd
+        # command: >
+        #   bash -c "docker-php-ext-install mysqli && docker-php-ext-enable mysqli && apache2-foreground"
+    
+networks:
+    servidorweb:
+        driver: bridge
+        
+volumes:
+  mysql:
+  phpmyadmin:
+  servidorphp:
