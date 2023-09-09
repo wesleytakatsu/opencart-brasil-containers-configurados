@@ -1,94 +1,32 @@
 # Use a imagem base do PHP com Apache
 FROM php:7.4-apache
 
-# Instale as extensões PHP zip e gd
+# Habilitar mod_rewrite do Apache
 RUN a2enmod rewrite
 
-RUN set -eu && apt-get update
+# Instale as extensões PHP e outras dependências
+RUN apt-get update && apt-get install -y \
+    libzip-dev \
+    libpng-dev \
+    libjpeg-dev \
+    libfreetype6-dev \
+    libjpeg62-turbo-dev \
+    libmcrypt-dev \
+    libxml2-dev \
+    libonig-dev \
+    libcurl4-openssl-dev \
+    libssl-dev \
+    libpq-dev \
+    libicu-dev \
+    libxslt-dev \
+    libmagickwand-dev \
+    imagemagick \
+    libmemcached-dev \
+    libmemcached11 \
+    libmemcachedutil2 \
+    libmemcached-tools
 
-# Instale as extensões PHP zip e gd e outras dependências
-RUN apt-get install -y \
-    libzip-dev \
-    libpng-dev \
-    libjpeg-dev \
-    libfreetype6-dev \
-    libjpeg62-turbo-dev \
-    libmcrypt-dev \
-    libxml2-dev \
-    libonig-dev \
-    libcurl4-openssl-dev \
-    libssl-dev \
-    libpq-dev \
-    libicu-dev \
-    libxslt-dev \
-    libmagickwand-dev \
-    imagemagick \
-    libmagickcore-dev \
-    libmagickwand-dev \
-    libmagick++-dev \
-    libmemcached-dev \
-    libmemcached11 \
-    libmemcachedutil2 \
-    libmemcached-tools \
-    libzip-dev \
-    libpq-dev \
-    libpng-dev \
-    libjpeg-dev \
-    libfreetype6-dev \
-    libjpeg62-turbo-dev \
-    libmcrypt-dev \
-    libxml2-dev \
-    libonig-dev \
-    libcurl4-openssl-dev \
-    libssl-dev \
-    libpq-dev \
-    libicu-dev \
-    libxslt-dev \
-    libmagickwand-dev \
-    imagemagick \
-    libmagickcore-dev \
-    libmagickwand-dev \
-    libmagick++-dev \
-    libmemcached-dev \
-    libmemcached11 \
-    libmemcachedutil2 \
-    libmemcached-tools \
-    libzip-dev \
-    libpq-dev \
-    libpng-dev \
-    libjpeg-dev \
-    libfreetype6-dev \
-    libjpeg62-turbo-dev \
-    libmcrypt-dev \
-    libxml2-dev \
-    libonig-dev \
-    libcurl4-openssl-dev \
-    libssl-dev \
-    libpq-dev \
-    libicu-dev \
-    libxslt-dev \
-    libmagickwand-dev \
-    imagemagick \
-    libmagickcore-dev \
-    libmagickwand-dev \
-    libmagick++-dev \
-    libmemcached-dev \
-    libmemcached11 \
-    libmemcachedutil2 \
-    libmemcached-tools \
-    libzip-dev \
-    libpq-dev \
-    libpng-dev \
-    libjpeg-dev \
-    libfreetype6-dev \
-    libjpeg62-turbo-dev \
-    libmcrypt-dev \
-    libxml2-dev \
-    libonig-dev \
-    libcurl4-openssl-dev \
-    libssl-dev
-
-# Instale as extensões PHP zip e gd
+# Instale as extensões PHP
 RUN docker-php-ext-install \
     zip \
     gd \
@@ -113,117 +51,7 @@ RUN docker-php-ext-install \
     sysvmsg \
     sysvsem \
     sysvshm \
-    mysqli \
-    pdo_mysql \
-    pdo_pgsql \
-    pgsql \
-    intl \
-    xsl \
-    soap \
-    bcmath \
-    opcache \
-    sockets \
-    exif \
-    pcntl \
-    gettext \
-    calendar \
-    shmop \
-    sysvmsg \
-    sysvsem \
-    sysvshm \
-    mysqli \
-    pdo_mysql \
-    pdo_pgsql \
-    pgsql \
-    intl \
-    xsl \
-    soap \
-    bcmath \
-    opcache \
-    sockets \
-    exif \
-    pcntl \
-    gettext \
-    calendar \
-    shmop \
-    sysvmsg \
-    sysvsem \
-    sysvshm \
-    mysqli \
-    pdo_mysql \
-    pdo_pgsql \
-    pgsql \
-    intl \
-    xsl \
-    soap \
-    bcmath \
-    opcache \
-    sockets \
-    exif \
-    pcntl \
-    gettext \
-    calendar \
-    shmop \
-    sysvmsg \
-    sysvsem \
-    sysvshm \
-    mysqli \
-    pdo_mysql \
-    pdo_pgsql \
-    pgsql \
-    intl \
-    xsl \
-    soap \
-    bcmath \
-    opcache \
-    sockets \
-    exif \
-    pcntl \
-    gettext \
-    calendar \
-    shmop \
-    sysvmsg \
-    sysvsem \
-    sysvshm \
-    mysqli \
-    pdo_mysql \
-    pdo_pgsql \
-    pgsql \
-    intl \
-    xsl \
-    soap \
-    bcmath \
-    opcache \
-    sockets \
-    exif \
-    pcntl \
-    gettext \
-    calendar \
-    shmop \
-    sysvmsg \
-    sysvsem \
-    sysvshm \
-    mysqli \
-    pdo_mysql \
-    pdo_pgsql \
-    pgsql \
-    intl \
-    xsl \
-    soap \
-    bcmath \
-    opcache \
-    sockets \
-    exif \
-    pcntl \
-    gettext \
-    calendar \
-    shmop \
-    sysvmsg \
-    sysvsem \
-    sysvshm
-    
-
-
+    pgsql
 
 # Copie o arquivo de configuração php.ini personalizado (se você tiver um)
 COPY ./php_config/php.ini /usr/local/etc/php/php.ini
