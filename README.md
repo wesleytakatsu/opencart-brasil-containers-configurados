@@ -4,7 +4,6 @@
   
   
   
-  
 ## O servidor está configurado com muitos complementos sendo grande parte deles desnecessários.  
 Retire-os conforme quiser personalizar sua instalação no arquivo dockerfile.  
 Além disso, esse projeto é bom para personalizar para outros projetos Web também.  
@@ -13,10 +12,9 @@ Além disso, esse projeto é bom para personalizar para outros projetos Web tamb
 A princípio é essa configuração: 
 Endereço: localhost   
 SGBD: MySQL  
-Banco: opencart  
+Banco: opencartbrasil  
 User: root  
 Senha: root  
-  
   
   
 
