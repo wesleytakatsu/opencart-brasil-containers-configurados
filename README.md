@@ -8,6 +8,18 @@
 Retire-os conforme quiser personalizar sua instalação no arquivo dockerfile.  
 Além disso, esse projeto é bom para personalizar para outros projetos Web também.  
   
+
+## Comandos:
+Iniciar:  
+docker-compose up -d  
+  
+Parar:  
+docker-compose down  
+
+Fazer o build dos containers analizando a construção:  
+docker-compose up --build  
+  
+
 ## Use a mesma configuração no OpenCart que você usou no .env para o banco de dados  
 A princípio é essa configuração: 
 Endereço: localhost   
